@@ -40,7 +40,7 @@ let db = new sqlite3.Database('./reminders.db', (err) => {
 });
 
 // Attempt to locate the "reminders" table, and if it doesn't exist already, create a new table.
-db.all('SELECT name FROM sqlite_master WHERE type=? AND name=', ['table', 'reminders'], (err, rows) => {
+db.all('SELECT name FROM sqlite_master WHERE type=? AND name=?', ['table', 'reminders'], (err, rows) => {
     if (err) {
         console.error(err.message);
         return;
@@ -57,7 +57,7 @@ db.all('SELECT name FROM sqlite_master WHERE type=? AND name=', ['table', 'remin
             + 'userId varchar, '
             + 'message varchar, '
             + 'request datetime, '
-            + 'response datetime', (err) => {
+            + 'response datetime)', (err) => {
             if (err)
             {
                 return console.error(err.message);
@@ -91,7 +91,8 @@ client.on('message', message => {
     if (message.channel.type !== 'dm')
         guildId = message.guild.id;
 
-    if (message.content.toLowerCase().startsWith(botconfig.prefix + botconfig.command)) {
+    if (message.content.toLowerCase().startsWith(botconfig.command + botconfig.postfix)) {
+        console.log('RemindMe!');
         // TODO: Parse message.content for future date
         // TODO: Add current date to parsed future date
         // TODO: Store date in table
@@ -105,4 +106,6 @@ client.on('message', message => {
 
 // TODO: Need a timeout event to run every so often and search for messages to send
 
+// Invite URL: https://discordapp.com/oauth2/authorize?&client_id=609445343133827073&scope=bot&permissions=0
+// Log our bot in using the token from https://discordapp.com/developers/applications/me
 client.login(token.token);
