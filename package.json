@@ -1,0 +1,11 @@
+{
+	"name": "remindme-bot",
+	"version": "1.0.0",
+	"description": "Automatically remind a user about a post on a given date/time",
+	"main": "index.js",
+	"author": "Loney, Alex",
+	"dependencies": {
+		"discord.js": "^11.5.1",
+		"sqlite3": "^4.0.9"
+	}
+}
